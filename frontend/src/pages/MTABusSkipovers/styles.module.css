@@ -1,0 +1,56 @@
+.heading{
+    margin: 10px 15px;
+}
+
+.entry{
+    height: 60px;
+    display: flex;
+    margin-bottom: 5px;
+    justify-content: space-around;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+.description{
+    margin: 15px
+}
+
+.busEntry{
+    border-radius: 5px;
+    margin:2px;
+    width: 33%;
+    background-color: rgba(200,200,200,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loaderContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+}
+
+.busEntry:hover{
+    background-color: rgba(200,200,200,0.8);
+    cursor: pointer;
+}
+
+.highlight{
+    background-color: rgba(0,200,200,0.5);
+}
+
+.highlight:hover{
+    background-color: rgba(0,200,200,0.8);
+}
+
+.auxtext{
+    margin-right:5px;
+}
+
+@media screen and (max-width: 600px) {
+    .auxtext{
+        display: none;
+    }
+}

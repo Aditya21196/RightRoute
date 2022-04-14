@@ -1,5 +1,30 @@
 .App {
-  text-align: center;
+  text-align: justify;
+  text-justify: inter-word;
+  height: 100%;
+  width: 100%;
+}
+
+html{
+  height: 100%;
+  width: 100%;
+}
+
+h1{
+  margin: 0;
+}
+
+body{
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(100.96deg, #00C897 20.09%, #019267 79.77%);
+  color: #FDFFA9;
+}
+
+#root{
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .App-logo {
@@ -34,5 +59,17 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h1{
+    font-size: 20px;
+  }
+  h3{
+    font-size: 15px;
+  }
+  body{
+    font-size: 15px;
   }
 }
