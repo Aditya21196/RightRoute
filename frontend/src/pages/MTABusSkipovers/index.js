@@ -22,26 +22,50 @@ const MTABusSkipovers = () => {
       </div>
     }
 
+    const renderRoute = (routeToDisplay,dirToDisplay) => {
+        return <div className={styles.route}>
+            Route: {routeToDisplay} ({dirToDisplay === 0?'forward':'reverse'} direction)
+        </div>
+    }
+
     const renderData = () => {
+        let prevRoute = null, prevDir = null;
         return <div>
             {data.map(entry => {
-                let rand = getRandomIntInclusive(0,1);
-                return <div className={styles.entry}>
-                    <div className={`${styles.busEntry} ${entry['highlight']===0?styles.highlight:''}`}>
-                        <span className={styles.auxtext}>bus 1:</span>
-                        {entry.bus1}
+                let routeToDisplay = null, dirToDisplay = null;
+                if(entry.route !== prevRoute && entry.route_dir !== prevDir){
+                    routeToDisplay = entry.route;
+                    dirToDisplay = entry.route_dir;
+                }
+                prevRoute = entry.route;
+                prevDir = entry.route_dir;
+
+                return <div>
+                    {routeToDisplay!=null && dirToDisplay!=null && renderRoute(routeToDisplay,dirToDisplay)}
+                    <div className={styles.entry}>
+                        <div className={`${styles.busEntry} ${entry['highlight']===0?styles.highlight:''}`}>
+                            {entry['highlight']===0 && <div className={styles.canSkip}>Can Skip Next Stop!</div>}
+                            <span className={styles.auxtext}>bus 1:</span>
+                            {entry.bus1}
+                        </div>
+                        <div className={`${styles.busEntry}`}>
+                            <span className={styles.auxtext}>distance:</span>
+                            {`${entry.distance} mi`}</div>
+                        <div className={`${styles.busEntry} ${entry['highlight']===1?styles.highlight:''}`}>
+                            {entry['highlight']===1 && <div className={styles.canSkip}>Can Skip Next Stop!</div>}
+                            <span className={styles.auxtext}>bus 2:</span>
+                            {entry.bus2}
+                        </div>
                     </div>
-                    <div className={`${styles.busEntry}`}>
-                        <span className={styles.auxtext}>distance:</span>
-                        {`${entry.distance} mi`}</div>
-                    <div className={`${styles.busEntry} ${entry['highlight']===1?styles.highlight:''}`}>
-                        <span className={styles.auxtext}>bus 2:</span>
-                        {entry.bus2}
-                    </div>
-                    {/*{` and ${entry.bus2} are running at a distance of ${entry.distance} miles on the same route.`}*/}
                 </div>
             })}
         </div>
+    }
+
+    const renderLength = () => {
+      return <span className={styles.dataLengthSpan}>
+           As of now, <span className={styles.busesNumber}>{data.length}</span> buses may skip the next stop.
+      </span>
     }
 
     return (
@@ -50,10 +74,12 @@ const MTABusSkipovers = () => {
             <h3 className={styles.description}>
                 Each Row Contains MTA Bus IDs of busses on the same route and direction which are running very close and the distance between them.
                 If they are too close then one of them may skip the next bus stop if no passenger wants to get off.
-                The bus ID which is being highlighted is the one closer to next bus stop and will be sent a signal.
-                If the bus driver sees this signal and there is no passenger getting off, he will skip the next stop.
-                This will save a lot of city's resources in the long run and contribute to reduction of traffic congestion.
+                The bus ID which is being highlighted in red is the one closer to next bus stop and will be sent a signal.
+                If the bus driver sees this signal and there is no passenger getting off, they may skip the next stop.
+                Or if the bus is empty, it can be rerouted.
+                This will save a lot of city's resources in the long run and greatly contribute to reduction of traffic congestion.
                 <br/><br/>This data updates every 30 seconds on average.
+                {data && renderLength()}
             </h3>
             {data == null ? renderLoader():renderData()}
         </div>

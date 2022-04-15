@@ -11,11 +11,20 @@
     padding: 0 10px;
 }
 
+.canSkip{
+    font-size: 10px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: yellow;
+}
+
 .description{
     margin: 15px
 }
 
 .busEntry{
+    position: relative;
     border-radius: 5px;
     margin:2px;
     width: 33%;
@@ -38,11 +47,24 @@
 }
 
 .highlight{
-    background-color: rgba(0,200,200,0.5);
+    background-color: rgba(250,0,0,0.5);
+}
+
+.busesNumber{
+    color: rgb(200,0,0);
+    text-decoration-line:underline;
+}
+
+.route{
+    margin: 10px 12px;
+}
+
+.dataLengthSpan{
+    margin-left: 5px;
 }
 
 .highlight:hover{
-    background-color: rgba(0,200,200,0.8);
+    background-color: rgba(200,0,0,0.8);
 }
 
 .auxtext{
