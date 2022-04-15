@@ -12,6 +12,7 @@ html{
 
 h1{
   margin: 0;
+  color: #383838;
 }
 
 body{
@@ -62,7 +63,7 @@ body{
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 640px) {
   h1{
     font-size: 20px;
   }
@@ -71,5 +72,11 @@ body{
   }
   body{
     font-size: 15px;
+  }
+}
+
+@media screen and (max-width: 450px){
+  body{
+    font-size: 12px;
   }
 }
