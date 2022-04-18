@@ -64,7 +64,7 @@ const MTABusSkipovers = () => {
 
     const renderLength = () => {
       return <span className={styles.dataLengthSpan}>
-           As of now, <span className={styles.busesNumber}>{data.length}</span> buses may skip the next stop.
+           As of now, <span className={styles.busesNumber}>{data.length}</span> buses may skip the next stop. This goes up to <span className={styles.busesNumber}>800</span> during peak hours.
       </span>
     }
 
@@ -72,14 +72,20 @@ const MTABusSkipovers = () => {
         <div>
             <h1 className={styles.heading}>MTA Buses Which Are Running Too Close</h1>
             <h3 className={styles.description}>
-                Each Row Contains MTA Bus IDs of busses on the same route and direction which are running very close and the distance between them.
-                If they are too close then one of them may skip the next bus stop if no passenger wants to get off.
-                The bus ID which is being highlighted in red is the one closer to next bus stop and will be sent a signal.
-                If the bus driver sees this signal and there is no passenger getting off, they may skip the next stop.
-                Or if the bus is empty, it can be rerouted.
-                This will save a lot of city's resources in the long run and greatly contribute to reduction of traffic congestion.
-                <br/><br/>This data updates every 30 seconds on average.
-                {data && renderLength()}
+                <ul className={styles.list}>
+                    <h2>Methodology</h2>
+                    <li>Each Row Contains MTA Bus IDs of buses on the same route and direction which are running very close and the distance between them.</li>
+                    <li>The bus ID which is being highlighted in red is the one closer to next bus stop and will be sent a signal.</li>
+                    <li>When the bus driver sees this signal and there is no passenger getting off, they may skip the next stop.
+                        Or if the bus is empty, it can be rerouted.</li>
+                    <h2>Outcomes</h2>
+                    <li>This will save a lot of city's resources in the long run and greatly contribute to reduction of traffic congestion.</li>
+                    <li>{data && renderLength()}</li>
+                    <h2>Caveats</h2>
+                    <li>We are ignoring the edge case in which the trailing bus might be full. As per experience, this rarely happens.</li>
+                </ul>
+                <div className={styles.freq}>This data updates every 30 seconds on average.
+                </div>
             </h3>
             {data == null ? renderLoader():renderData()}
         </div>
